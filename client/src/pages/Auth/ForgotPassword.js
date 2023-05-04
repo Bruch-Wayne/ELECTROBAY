@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const ForgotPassword = () => {
@@ -75,6 +75,12 @@ const ForgotPassword = () => {
           <button type="submit" className="btn btn-primary">
             RESET
           </button>
+          <div className="my-3">
+            <p className="text-center">
+              Don't have an account?
+              <Link to="/register"> Register.</Link>
+            </p>
+          </div>
         </form>
       </div>
     </Layout>

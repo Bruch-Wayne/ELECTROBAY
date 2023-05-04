@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useNavigate, useLocation, Navigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../styles/AuthStyle.css";
 import { useAuth } from "../../context/auth";
@@ -89,6 +89,12 @@ const Login = () => {
           <button type="submit" className="btn btn-primary">
             LOGIN
           </button>
+          <div className="my-3">
+            <p className="text-center">
+              Don't have an account?
+              <Link to="/register"> Register.</Link>
+            </p>
+          </div>
         </form>
       </div>
     </Layout>
