@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 const { Option } = Select;
 
 const UpdateProduct = () => {
@@ -51,7 +52,7 @@ const UpdateProduct = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something wwent wrong in getting catgeory");
+      toast.error("Something went wrong in getting category.");
     }
   };
 
@@ -82,23 +83,42 @@ const UpdateProduct = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong");
+      toast.error("something went wrong.");
     }
   };
 
   //delete a product
   const handleDelete = async () => {
     try {
-      let answer = window.prompt("Are You Sure want to delete this product ? ");
-      if (!answer) return;
-      const { data } = await axios.delete(
-        `/api/v1/product/delete-product/${id}`
-      );
-      toast.success("Product DEleted Succfully");
-      navigate("/dashboard/admin/products");
+      // let answer = window.prompt("Are You Sure want to delete this product ? ");
+      // if (!answer) return;
+      // const { data } = await axios.delete(
+      //   `/api/v1/product/delete-product/${id}`
+      // );
+
+      // toast.success("Product DEleted Succfully");
+      // navigate("/dashboard/admin/products");
+
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (result.isConfirmed) {
+        const { data } = await axios.delete(
+          `/api/v1/product/delete-product/${id}`
+        );
+        toast.success("Product deleted successfully");
+        navigate("/dashboard/admin/products");
+      }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error("Something went wrong.");
     }
   };
   return (
@@ -157,6 +177,7 @@ const UpdateProduct = () => {
                       alt="product_photo"
                       height={"200px"}
                       className="img img-responsive"
+                      style={{ borderRadius: "10px" }}
                     />
                   </div>
                 )}

@@ -10,6 +10,7 @@
 .home-page {
   display: flex;
   flex-wrap: wrap;
+  margin-left: 0 !important;
 }
 .home-page .card {
   background-color: rgba(128, 128, 128, 0.097);
@@ -50,6 +51,7 @@
   ============== */
 .filters h4 {
   margin-top: 100px;
+  padding: 10px;
   color: gray !important;
   border-bottom: 1px solid rgba(128, 128, 128, 0.337);
 }

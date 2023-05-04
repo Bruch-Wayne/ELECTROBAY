@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../styles/AuthStyle.css";
+import { useAuth } from "../../context/auth";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,8 +12,15 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
+  const [auth, setAuth] = useAuth();
+
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (auth?.token) {
+      navigate("/");
+    }
+  }, [auth?.token, navigate]);
   // form function
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +41,7 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error("Something went wrong.");
     }
   };
 
